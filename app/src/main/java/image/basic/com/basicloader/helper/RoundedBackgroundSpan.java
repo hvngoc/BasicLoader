@@ -5,10 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.ReplacementSpan;
-import android.widget.TextView;
 
 import image.basic.com.basicloader.R;
 
@@ -40,41 +37,16 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
         PADDING_Y = mContext.getResources().getDimensionPixelSize(R.dimen.dimen_2dp);
     }
 
-    public static void setTags(TextView mTextView, String[] tags, Context context, int backgroundColor, int textColor, int textSize) {
-        if (tags == null) {
-            return;
-        }
-        /** Tricking the text view for getting a bigger line height */
-        mTextView.setTextSize(textSize / 2);
-
-        SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-
-        String between = " ";
-        int tagStart = 0;
-
-        for (String tag : tags) {
-            /** Append tag and space after */
-            stringBuilder.append(tag);
-            stringBuilder.append(between);
-
-            /** Set span for tag */
-            RoundedBackgroundSpan tagSpan = new RoundedBackgroundSpan(context, backgroundColor, textColor, textSize);
-            stringBuilder.setSpan(tagSpan, tagStart, tagStart + tag.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            /** Update to next tag start */
-            tagStart += tag.length() + between.length();
-        }
-        mTextView.setText(stringBuilder);
-    }
-
     @Override
     public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end,
                      float x, int top, int y, int bottom, @NonNull Paint paint) {
-        paint = new Paint(paint); /** make a copy for not editing the referenced paint */
+        paint = new Paint(paint);
 
         paint.setTextSize(mTextSize);
 
         /** Draw the rounded background */
+        if (top == 0)
+            top = PADDING_Y + PADDING_Y - PADDING_Y / 2;
         paint.setColor(mBackgroundColor);
         int textHeightWrapping = mContext.getResources().getDimensionPixelSize(R.dimen.dimen_4dp);
         float tagBottom = top + textHeightWrapping + PADDING_Y + mTextSize + PADDING_Y + textHeightWrapping;
@@ -84,7 +56,7 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
 
         /** Draw the text */
         paint.setColor(mTextColor);
-        canvas.drawText(text, start, end, x + PADDING_X, tagBottom - PADDING_Y - textHeightWrapping , paint);
+        canvas.drawText(text, start, end, x + PADDING_X, tagBottom - PADDING_Y - textHeightWrapping - PADDING_Y, paint);
     }
 
     private int getTagWidth(CharSequence text, int start, int end, Paint paint) {
@@ -93,7 +65,7 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
 
     @Override
     public int getSize(@NonNull Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
-        paint = new Paint(paint); /** make a copy for not editing the referenced paint */
+        paint = new Paint(paint);
         paint.setTextSize(mTextSize);
         return getTagWidth(text, start, end, paint);
     }

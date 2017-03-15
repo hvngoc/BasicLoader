@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import image.basic.com.basicloader.R;
-import image.basic.com.basicloader.helper.RoundedBackgroundSpan;
+import image.basic.com.basicloader.global.RoundedSpanUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         TextView text = (TextView) findViewById(R.id.text);
 
         String[] s = new String[]{"hefsfdllo", "helffflo", "hello", "hello", "324f23"
-                ,"hel4234sdfsadflo", "324sdfsadf", "he333llo", "hello", "sdfdf", "hell12312o",
-                "ff", "234sdf3", "helsdafasffflo", "hefsfdllo", "helffflo", "hello", "hello", "324f23"
-                ,"hel4234sdfsadflo", "324sdfsadf", "he333llo", "hello", "sdfdf", "hell12312o",
+                , "hel4234sdfsadflo", "324sdfsadf", "he333llo", "hello", "sdfdf", "hell12312o",
+                "ff", "234sdf3", "helsdafasffflo", "hefsfdllo"
+                , "helffflo", "hello", "hello", "324f23"
+                , "hel4234sdfsadflo", "324sdfsadf", "he333llo", "hello", "sdfdf", "hell12312o",
                 "ff", "234sdf3", "helsdafasffflo"};
 
-        RoundedBackgroundSpan.setTags(text, s, this,
-                Color.RED, Color.WHITE, getResources().getDimensionPixelSize(R.dimen.text_10sp));
-
+        RoundedSpanUtils.setTags(text, s, this,
+                Color.RED, Color.WHITE, getResources().getDimensionPixelSize(R.dimen.text_12sp));
     }
 }
