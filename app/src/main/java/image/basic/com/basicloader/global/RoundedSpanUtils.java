@@ -3,7 +3,12 @@ package image.basic.com.basicloader.global;
 import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.TextView;
 
 import image.basic.com.basicloader.helper.RoundedBackgroundSpan;
@@ -30,7 +35,24 @@ public class RoundedSpanUtils {
             stringBuilder.append(tag);
             stringBuilder.append(between);
 
-            /** Set span for tag */
+            ClickableSpan clickableSpan = new ClickableSpan() {
+                @Override
+                public void onClick(View textView) {
+                    TextView tv = (TextView) textView;
+                    Spanned s = (Spanned) tv.getText();
+                    int start = s.getSpanStart(this);
+                    int end = s.getSpanEnd(this);
+                    Log.d("Rounded", "onClick [" + s.subSequence(start, end) + "]");
+                }
+
+                @Override
+                public void updateDrawState(TextPaint ds) {
+                    super.updateDrawState(ds);
+                    ds.setUnderlineText(false);
+                }
+            };
+            stringBuilder.setSpan(clickableSpan, tagStart, tagStart + tag.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
             RoundedBackgroundSpan tagSpan = new RoundedBackgroundSpan(context, backgroundColor, textColor, textSize);
             stringBuilder.setSpan(tagSpan, tagStart, tagStart + tag.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -38,5 +60,7 @@ public class RoundedSpanUtils {
             tagStart += tag.length() + between.length();
         }
         mTextView.setText(stringBuilder);
+        mTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        mTextView.setHighlightColor(backgroundColor);
     }
 }

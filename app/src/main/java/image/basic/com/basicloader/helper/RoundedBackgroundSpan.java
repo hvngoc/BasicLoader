@@ -46,7 +46,9 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
 
         /** Draw the rounded background */
         if (top == 0)
-            top = PADDING_Y + PADDING_Y - PADDING_Y / 2;
+            top = PADDING_Y + PADDING_Y;
+        else
+            top += PADDING_Y;
         paint.setColor(mBackgroundColor);
         int textHeightWrapping = mContext.getResources().getDimensionPixelSize(R.dimen.dimen_4dp);
         float tagBottom = top + textHeightWrapping + PADDING_Y + mTextSize + PADDING_Y + textHeightWrapping;
