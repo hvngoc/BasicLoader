@@ -1,8 +1,11 @@
 package image.basic.com.basicloader.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import image.basic.com.basicloader.R;
@@ -26,5 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
         RoundedSpanUtils.setTags(text, s, this,
                 Color.RED, Color.WHITE, getResources().getDimensionPixelSize(R.dimen.text_12sp));
+
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TranslucentActivity.class));
+            }
+        });
     }
 }
