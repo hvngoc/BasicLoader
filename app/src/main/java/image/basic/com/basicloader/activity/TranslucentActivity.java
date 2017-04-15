@@ -7,16 +7,20 @@ import android.view.View;
 import image.basic.com.basicloader.R;
 
 public class TranslucentActivity extends AppCompatActivity {
+    View mView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translucent);
+        mView = findViewById(R.id.bottom);
         enableFullScreen(true);
 
-        findViewById(R.id.bottom).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.top).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 enableFullScreen(false);
+                showBottom();
             }
         });
 
@@ -24,6 +28,7 @@ public class TranslucentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 enableFullScreen(true);
+                hideBottom();
             }
         });
     }
@@ -42,5 +47,13 @@ public class TranslucentActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_IMMERSIVE;
         }
         getWindow().getDecorView().setSystemUiVisibility(newVisibility);
+    }
+
+    private void hideBottom() {
+        mView.animate().translationY(mView.getHeight());
+    }
+
+    private void showBottom() {
+        mView.animate().translationY(0);
     }
 }

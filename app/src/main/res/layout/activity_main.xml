@@ -20,6 +20,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text"
-        android:text="click here" />
+        android:text="click Translucent" />
+
+    <Button
+        android:id="@+id/decoration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:text="click Decoration" />
+
 
 </RelativeLayout>

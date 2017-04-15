@@ -14,20 +14,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
+        <TextView
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="top"
+            android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:text="show"
+            android:textSize="44sp" />
+
+        <TextView
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:background="@color/colorAccent"
-            android:clickable="true" />
+            android:clickable="true"
+            android:text="hide"
+            android:textSize="44sp" />
 
         <View
             android:id="@+id/bottom"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:clickable="true" />
     </FrameLayout>
 </FrameLayout>

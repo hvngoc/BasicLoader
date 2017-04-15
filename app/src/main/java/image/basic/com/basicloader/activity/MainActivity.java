@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import image.basic.com.basicloader.R;
+import image.basic.com.basicloader.decoration.DecorationActivity;
 import image.basic.com.basicloader.global.RoundedSpanUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, TranslucentActivity.class));
+            }
+        });
+
+        findViewById(R.id.decoration).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, DecorationActivity.class));
             }
         });
     }
