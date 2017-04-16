@@ -1,9 +1,15 @@
 package image.basic.com.basicloader.decoration;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +32,15 @@ public class DecorationFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Decoration Fragment");
+        String title = "abc123def456";
+        SpannableString ss = new SpannableString(title + " ");
+
+        Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.ic_arrow_drop_down_black_24px);
+        DrawableCompat.setTint(d, ContextCompat.getColor(getContext(), R.color.colorPrimary));
+        d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
+        ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
+        ss.setSpan(span, title.length(), title.length() + 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(ss);
     }
 }
